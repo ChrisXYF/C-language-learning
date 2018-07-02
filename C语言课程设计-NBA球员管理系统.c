@@ -126,46 +126,51 @@ void login()
 	FILE *fp1;
 	int i;
 	int flag=0;
-	char ch[50];
+	char ch[50],p[50];
 	fp1 = fopen("name.txt", "rt");
 	printf("\t请输入用户名：");
 	getchar();
-	gets(log.name);
+	gets(ch);
 	printf("\t请输入密码：");
 	for (i = 0;; i++)
 	{
-		log.pwd[i] = getch();
-		switch (log.pwd[i])
+		p[i] = getch();
+		switch (p[i])
 		{
 		case '\b':
-			log.pwd[--i] = '\0';
+			p[--i] = '\0';
 			i--;
 			printf("\b \b");
 			break;
 		case '\r':
-			log.pwd[i] = '\0';
+			p[i] = '\0';
 			putchar('\n');
 			break;
 		default:
 			putchar('*');
 			break;
 		}
-		if (log.pwd[i] == '\0') break;
+		if (p[i] == '\0') break;
 	}
-	while(fscanf(fp1,"%s %s",log.name,log.pwd)!=EOF)
+	while(fscanf(fp1,"%s",log.name)!=EOF)
 	{	
 		if( strcmp(ch,log.name)==0 )
 		{
-			if ( strcmp(log.pwd,log.pwd)==0 )
+			while(fscanf(fp1,"%s",log.pwd)!=EOF)
+			{
+			
+			if ( strcmp(p,log.pwd)==0 )
 			{
 				flag=1;
 				break;
 			} 
-			else if(strcmp(log.pwd,log.pwd)!=0)
+			else if(strcmp(p,log.pwd)!=0)
 			{
 				flag=0;
 				continue;
 			}
+		}
+		break;
 		}
 		else if(strcmp(ch,log.name)!=0)
 		{
@@ -180,53 +185,48 @@ void login()
 		}
 		else if(flag ==0)
 		{
-			printf("\t密码出错！Σ(っ°Д°;)っ");
+			printf("\t密码出错！");
 			getch();
 			menu();
 		}
 		else if(flag ==2)
 		{
-			printf("\t密码不准确或您还未注册！o(╥﹏╥)o");
+			printf("\t您输入用户名不存在！");
 			getch();
 			menu();
 		}
-	    else if (pd(log) == 1)
-	    {
-		printf("\t对不起，您输入用户名不存在\n");
-		getch();
-		menu();
-	    }
+	
 }
 void process()
 {
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t恭喜登陆成功！老司机开车了，即将进入NBA的世界，系好安全带，出发\n");
-	Sleep(1200);
+	Sleep(1100);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t科比.布莱恩特---==≡≡ ...\n");
-	Sleep(500);
+	Sleep(400);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
-	printf("\t\t这球也能进？(((?'w')? ?'w')-o≡\n...\n");
-	Sleep(500);
+	printf("\t\t这球也能进？\n...\n");
+	Sleep(400);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t︿(￣︶￣)︿~ ...\n");
-	Sleep(500);
+	Sleep(400);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t这个大火锅结结实实 ...\n");
-	Sleep(500);
+	Sleep(400);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
-	printf("\t\t猥琐发育，别浪)～ !\n");
+	printf("\t\t湖人总冠军！)～ !\n");
 	Sleep(500);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t哈登晃到了勒布朗！！！...\n");
-	Sleep(500);
+	Sleep(400);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t这球走步了 !\n");
@@ -235,7 +235,7 @@ void process()
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\tThis is why we play ! \n");
 	printf("\t\t3...\n");
-	Sleep(500);
+	Sleep(400);
 	system("cls");
 	printf("\n\n\n\n\n\n\n");
 	printf("\t\t2..\n");
@@ -594,7 +594,7 @@ void sys_menu()
 		printf("\t│                    0-  退出程序                                │\n");
 		printf("\t└────────────────────────────────┘\n");
 		printf("\t注意:在未输入任何信息前,只能查看已存信息\n");
-		printf("\t欢迎使用NBA球星管理系统，请选择功能0-5：  ");
+		printf("\t欢迎使用NBA球星管理系统，请选择功能0-10：  ");
 		scanf("%d", &choice);
 		switch (choice)
 		{
@@ -645,8 +645,8 @@ main()
 {
 	nba *head = NULL;
 	choose();
-	Colorsetting();
-	menu();
+	//Colorsetting();
+	//menu();
 }
 void choose()
 {
@@ -721,4 +721,3 @@ void Colorsetting()
 		Colorsetting();
 	}
 }
-
